@@ -36,14 +36,13 @@ npx serve .          # or
 python3 -m http.server 8000
 ```
 
-## Replace the placeholders
+## Content wiring
 
-Everything marked below is demo content for Junior to swap:
+- **Showreel** — Google Drive embed in `index.html` (`.showreel__stage` iframe)
+- **Project films** — each Work card carries `data-video` (YouTube ID) and `data-title`; cards open in the on-site lightbox player
+- **Contact form** — submits to the Formspree endpoint set as `FORM_ENDPOINT` in `js/main.js`; falls back to a pre-filled mailto if the request fails
+- **Email** — jxtezmedia@gmail.com (menu + form fallback)
 
-1. **Showreel video** — `index.html`, `#showreelVideo` `src` + `poster` (currently a Google sample clip)
-2. **Project films** — each Work card carries `data-video` (YouTube ID) and `data-title`; cards open in the on-site lightbox player
-3. **Socials** — Instagram/Vimeo/YouTube links currently point at platform homepages (menu + footer)
-4. **Stats** — `data-counter` values in the Manifesto section
-5. **Contact form backend** — set `FORM_ENDPOINT` at the bottom of `js/main.js`
-   to a [Formspree](https://formspree.io) (or similar) URL. Until then the form
-   validates client-side and opens the visitor's mail client pre-filled.
+### Remaining placeholders
+
+- **Socials** — Instagram/Vimeo/YouTube links still point at platform homepages (menu + footer)
