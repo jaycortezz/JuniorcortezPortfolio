@@ -11,6 +11,7 @@
   --accent-deep: #344046;     /* charcoal blue */
   --line: rgba(232, 238, 242, 0.12);
   --font-display: "Syne", sans-serif;
+  --font-heading: "Archivo Black", "Arial Black", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-serif: "Cormorant Garamond", serif;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -72,7 +73,7 @@ body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
 }
 
 .preloader__sig {
-  width: clamp(14rem, 36vw, 26rem);
+  width: clamp(9rem, 18vw, 14rem);
   height: auto;
   margin: 0 auto;
 }
@@ -391,11 +392,11 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
 }
 
 .hero__title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2.4rem, 7vw, 6.5rem);
-  line-height: 0.96;
-  letter-spacing: -0.03em;
+  font-family: var(--font-heading);
+  font-weight: 400; /* Archivo Black is single-weight ultra bold */
+  font-size: clamp(2.8rem, 10vw, 9.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
 }
 .hero__title-line { display: block; white-space: nowrap; }
@@ -495,8 +496,8 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
   will-change: transform;
 }
 .marquee__item {
-  font-family: var(--font-display);
-  font-weight: 800;
+  font-family: var(--font-heading);
+  font-weight: 400;
   font-size: clamp(2.4rem, 7vw, 6rem);
   text-transform: uppercase;
   letter-spacing: -0.03em;
@@ -558,8 +559,8 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
   padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 6rem) 0;
 }
 .work__title {
-  font-family: var(--font-display);
-  font-weight: 800;
+  font-family: var(--font-heading);
+  font-weight: 400;
   font-size: clamp(3rem, 10vw, 9rem);
   line-height: 1;
   letter-spacing: -0.04em;
@@ -670,8 +671,8 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
   padding: clamp(6rem, 12vw, 10rem) clamp(1.5rem, 6vw, 6rem);
 }
 .services__title {
-  font-family: var(--font-display);
-  font-weight: 800;
+  font-family: var(--font-heading);
+  font-weight: 400;
   font-size: clamp(3rem, 10vw, 9rem);
   line-height: 1;
   letter-spacing: -0.04em;
@@ -818,8 +819,8 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
 .contact__inner { max-width: 80rem; margin: 0 auto; }
 
 .contact__title {
-  font-family: var(--font-display);
-  font-weight: 800;
+  font-family: var(--font-heading);
+  font-weight: 400;
   font-size: clamp(2.6rem, 8.5vw, 8rem);
   line-height: 0.95;
   letter-spacing: -0.04em;

@@ -99,10 +99,9 @@
       .from(".hero__cta", { scale: 0.6, autoAlpha: 0, duration: 0.9, ease: "back.out(1.6)" }, "-=0.6")
       .to(".hero__frame-item", { autoAlpha: 1, duration: 0.6, stagger: 0.08 }, "-=0.7")
       .from(".hero__scroll-hint", { autoAlpha: 0, duration: 0.6 }, "-=0.4")
-      .from(".nav", { yPercent: -120, duration: 0.8, ease: "power3.out" }, "-=0.9")
-      .fromTo(".nav__logo-img",
-        { clipPath: "inset(0 100% 0 0)" },
-        { clipPath: "inset(0 0% 0 0)", duration: 1.1, ease: "power2.inOut" }, "-=0.5");
+      // fade nav children only — the bar itself must not move, it is the
+      // landing target for the preloader signature flight
+      .from(".nav__center, .nav__toggle", { autoAlpha: 0, y: -14, duration: 0.7, stagger: 0.1, ease: "power3.out" }, "-=0.9");
   }
 
   let preloaderStarted = false;
@@ -117,28 +116,53 @@
 
     document.documentElement.style.overflow = "hidden";
     const counter = { v: 0 };
+    const sig = document.querySelector(".preloader__sig");
+    const navImg = document.querySelector(".nav__logo-img");
 
-    const tl = gsap.timeline({
-      onComplete: () => {
+    // nav logo stays hidden until the preloader signature flies into its slot
+    if (navImg) gsap.set(navImg, { autoAlpha: 0 });
+    gsap.set(sig, { clipPath: "inset(0 100% 0 0)" });
+
+    function flySigToNav() {
+      const done = () => {
+        if (navImg) gsap.set(navImg, { autoAlpha: 1 });
         preloader.remove();
         document.documentElement.style.overflow = "";
-      },
-    });
+        if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
+      };
+      if (!sig || !navImg) return done();
+      const s = sig.getBoundingClientRect();
+      const n = navImg.getBoundingClientRect();
+      gsap.set(sig, { transformOrigin: "left top" });
+      gsap.to(sig, {
+        x: n.left - s.left,
+        y: n.top - s.top,
+        scale: n.width / s.width,
+        duration: 0.9,
+        ease: "power3.inOut",
+        onComplete: done,
+      });
+    }
 
-    // the signature "writes itself" left to right
-    tl.fromTo(".preloader__sig",
-      { clipPath: "inset(0 100% 0 0)" },
-      { clipPath: "inset(0 0% 0 0)", duration: 1.6, ease: "power1.inOut" })
-      .to(".preloader__tagline", { opacity: 1, duration: 0.6 }, "-=0.6")
+    const tl = gsap.timeline({ onComplete: flySigToNav });
+
+    tl.to(".preloader__tagline", { opacity: 1, duration: 0.5 })
+      // the signature writes itself in lockstep with the loading percentage
       .to(counter, {
         v: 100,
-        duration: 1.8,
+        duration: 2,
         ease: "power2.inOut",
-        onUpdate: () => { countEl.textContent = Math.round(counter.v); },
+        onUpdate: () => {
+          countEl.textContent = Math.round(counter.v);
+          if (sig) sig.style.clipPath = "inset(0 " + (100 - counter.v) + "% 0 0)";
+        },
       }, "<")
-      .to(".preloader__inner", { yPercent: -40, autoAlpha: 0, duration: 0.6, ease: "power2.in" })
+      .to([".preloader__count", ".preloader__tagline"], {
+        autoAlpha: 0, y: -16, duration: 0.45, ease: "power2.in",
+      })
       .add(heroEntrance, "-=0.1")
-      .to(".preloader__curtain--1", { yPercent: -100, duration: 1, ease: "power4.inOut" }, "-=1.2")
+      .add(() => { preloader.style.pointerEvents = "none"; }, "<")
+      .to(".preloader__curtain--1", { yPercent: -100, duration: 1, ease: "power4.inOut" }, "<")
       .to(".preloader__curtain--2", { yPercent: 100, duration: 1, ease: "power4.inOut" }, "<");
   }
 

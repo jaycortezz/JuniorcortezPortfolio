@@ -10,12 +10,12 @@ A single-page, award-style portfolio experience for videographer **Junior Cortez
 | Animation | [GSAP 3](https://gsap.com) + ScrollTrigger (CDN) |
 | Smooth scroll | [Lenis](https://lenis.darkroom.engineering) (CDN) |
 | WebGL hero | [Three.js](https://threejs.org) custom fbm-noise shader (CDN) |
-| Type | Syne · Inter · Cormorant Garamond (Google Fonts) |
+| Type | Archivo Black (headings) · Syne · Inter · Cormorant Garamond (Google Fonts) |
 
 ## Experience highlights
 
-- **Preloader** — signature logo "writes itself" in, 0–100% counter, split-curtain reveal into the hero
-- **Signature logo** — Junior's handwritten mark (`assets/logo.png`) writes in on load in the nav and again on scroll in the footer
+- **Preloader** — the signature writes itself in lockstep with the 0–100% counter, then flies into its nav slot as the curtains open
+- **Signature logo** — Junior's handwritten mark (`assets/logo.png`), also writes in on scroll in the footer
 - **Three.js hero** — mouse-reactive smoky gradient shader (ink black → ice blue), camera-HUD framing (REC dot, live timecode), per-character title reveal
 - **Custom cursor** — eased dot + ring with contextual `VIEW` / `PLAY` states
 - **Magnetic elements** — logo, menu button, CTAs pull toward the cursor with elastic release
