@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Junior Cortez — Cinematic Videographer | Wedding · Commercial · Corporate</title>
+  <meta name="description" content="Junior Cortez is a cinematic videographer crafting films for weddings, commercial brands and corporate stories. Every frame, intentional." />
+  <meta property="og:title" content="Junior Cortez — Cinematic Videographer" />
+  <meta property="og:description" content="Wedding · Commercial · Corporate film production. Every frame, intentional." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-theme="dark">
+
+  <!-- ============ PRELOADER ============ -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__inner">
+      <div class="preloader__logo">
+        <span class="preloader__char">J</span><span class="preloader__char">C</span>
+      </div>
+      <div class="preloader__count"><span id="preloaderCount">0</span></div>
+      <div class="preloader__tagline">every frame, intentional</div>
+    </div>
+    <div class="preloader__curtain preloader__curtain--1"></div>
+    <div class="preloader__curtain preloader__curtain--2"></div>
+  </div>
+
+  <!-- ============ CUSTOM CURSOR ============ -->
+  <div class="cursor" id="cursor">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring">
+      <span class="cursor__label"></span>
+    </div>
+  </div>
+
+  <!-- ============ GRAIN OVERLAY ============ -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="nav" id="nav">
+    <a href="#hero" class="nav__logo" data-magnetic>
+      <span class="nav__logo-mark">JC</span>
+      <span class="nav__logo-reg">®</span>
+    </a>
+    <div class="nav__center">
+      <span class="nav__location">Los Angeles, CA</span>
+      <span class="nav__time" id="navTime">00:00:00</span>
+    </div>
+    <button class="nav__toggle" id="menuToggle" data-magnetic aria-label="Open menu" aria-expanded="false">
+      <span class="nav__toggle-label">Menu</span>
+      <span class="nav__toggle-lines"><i></i><i></i></span>
+    </button>
+  </header>
+
+  <!-- ============ FULLSCREEN MENU ============ -->
+  <nav class="menu" id="menu" aria-hidden="true">
+    <div class="menu__bg"></div>
+    <div class="menu__inner">
+      <ul class="menu__list">
+        <li class="menu__item"><a href="#work" class="menu__link" data-menu-link><span class="menu__index">01</span><span class="menu__word" data-scramble>Work</span></a></li>
+        <li class="menu__item"><a href="#services" class="menu__link" data-menu-link><span class="menu__index">02</span><span class="menu__word" data-scramble>Services</span></a></li>
+        <li class="menu__item"><a href="#about" class="menu__link" data-menu-link><span class="menu__index">03</span><span class="menu__word" data-scramble>About</span></a></li>
+        <li class="menu__item"><a href="#showreel" class="menu__link" data-menu-link><span class="menu__index">04</span><span class="menu__word" data-scramble>Showreel</span></a></li>
+        <li class="menu__item"><a href="#contact" class="menu__link" data-menu-link><span class="menu__index">05</span><span class="menu__word" data-scramble>Contact</span></a></li>
+      </ul>
+      <div class="menu__footer">
+        <div class="menu__col">
+          <span class="menu__col-title">Socials</span>
+          <a href="https://instagram.com" target="_blank" rel="noopener" class="menu__social" data-hover-line>Instagram</a>
+          <a href="https://vimeo.com" target="_blank" rel="noopener" class="menu__social" data-hover-line>Vimeo</a>
+          <a href="https://youtube.com" target="_blank" rel="noopener" class="menu__social" data-hover-line>YouTube</a>
+        </div>
+        <div class="menu__col">
+          <span class="menu__col-title">Get in touch</span>
+          <a href="mailto:hello@juniorcortez.film" class="menu__social" data-hover-line>hello@juniorcortez.film</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main id="smooth-content">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+      <div class="hero__frame" aria-hidden="true">
+        <span class="hero__frame-item hero__frame-item--tl">REC <i class="hero__rec-dot"></i></span>
+        <span class="hero__frame-item hero__frame-item--tr">4K — 24FPS</span>
+        <span class="hero__frame-item hero__frame-item--bl">F2.8 · ISO 800</span>
+        <span class="hero__frame-item hero__frame-item--br" id="heroTimecode">00:00:00:00</span>
+      </div>
+      <div class="hero__content">
+        <p class="hero__eyebrow" data-reveal-lines>Videographer &amp; Director of Photography</p>
+        <h1 class="hero__title">
+          <span class="hero__title-line" data-split-chars>JUNIOR</span>
+          <span class="hero__title-line hero__title-line--offset" data-split-chars>CORTEZ</span>
+        </h1>
+        <div class="hero__sub">
+          <p class="hero__sub-text" data-reveal-lines>Cinematic films for <em>weddings</em>, <em>brands</em> &amp; <em>corporate stories</em> — shot with intention, edited with obsession.</p>
+          <a href="#showreel" class="hero__cta" data-magnetic data-cursor="play">
+            <span class="hero__cta-ring"></span>
+            <span class="hero__cta-icon">▶</span>
+            <span class="hero__cta-text">Watch reel</span>
+          </a>
+        </div>
+      </div>
+      <div class="hero__scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <span class="hero__scroll-line"></span>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track" data-marquee>
+        <span class="marquee__item">Wedding Films</span><span class="marquee__dot">✦</span>
+        <span class="marquee__item marquee__item--outline">Commercial</span><span class="marquee__dot">✦</span>
+        <span class="marquee__item">Corporate</span><span class="marquee__dot">✦</span>
+        <span class="marquee__item marquee__item--outline">Wedding Films</span><span class="marquee__dot">✦</span>
+        <span class="marquee__item">Commercial</span><span class="marquee__dot">✦</span>
+        <span class="marquee__item marquee__item--outline">Corporate</span><span class="marquee__dot">✦</span>
+      </div>
+    </div>
+
+    <!-- ============ MANIFESTO / ABOUT INTRO ============ -->
+    <section class="manifesto" id="about">
+      <div class="manifesto__inner">
+        <span class="section-label"><i>01</i> — The approach</span>
+        <p class="manifesto__text" data-words-reveal>
+          A wedding lives once. A brand speaks in seconds. A company is its people.
+          I make films that hold on to all three — light, honest, and built to outlast the moment.
+        </p>
+        <div class="manifesto__stats">
+          <div class="stat" data-stat>
+            <span class="stat__num"><span data-counter="180">0</span>+</span>
+            <span class="stat__label">Films delivered</span>
+          </div>
+          <div class="stat" data-stat>
+            <span class="stat__num"><span data-counter="11">0</span></span>
+            <span class="stat__label">Years behind the lens</span>
+          </div>
+          <div class="stat" data-stat>
+            <span class="stat__num"><span data-counter="14">0</span></span>
+            <span class="stat__label">Industry awards</span>
+          </div>
+          <div class="stat" data-stat>
+            <span class="stat__num"><span data-counter="60">0</span>M+</span>
+            <span class="stat__label">Views generated</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SELECTED WORK (horizontal scroll) ============ -->
+    <section class="work" id="work">
+      <div class="work__header">
+        <span class="section-label"><i>02</i> — Selected work</span>
+        <h2 class="work__title" data-split-chars>FILMS</h2>
+        <span class="work__hint">( scroll )</span>
+      </div>
+      <div class="work__pin" id="workPin">
+        <div class="work__track" id="workTrack">
+
+          <article class="project" data-cursor="view">
+            <div class="project__media">
+              <div class="project__img-wrap">
+                <img class="project__img" src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1400&q=80&auto=format&fit=crop" alt="Elena & Marcus wedding film still" loading="lazy" />
+              </div>
+              <span class="project__num">01</span>
+            </div>
+            <div class="project__meta">
+              <h3 class="project__name">Elena &amp; Marcus</h3>
+              <p class="project__tags">Wedding — Tuscany, Italy</p>
+            </div>
+          </article>
+
+          <article class="project" data-cursor="view">
+            <div class="project__media">
+              <div class="project__img-wrap">
+                <img class="project__img" src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1400&q=80&auto=format&fit=crop" alt="Meridian Capital corporate film still" loading="lazy" />
+              </div>
+              <span class="project__num">02</span>
+            </div>
+            <div class="project__meta">
+              <h3 class="project__name">Meridian Capital</h3>
+              <p class="project__tags">Corporate — Brand Story</p>
+            </div>
+          </article>
+
+          <article class="project" data-cursor="view">
+            <div class="project__media">
+              <div class="project__img-wrap">
+                <img class="project__img" src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=1400&q=80&auto=format&fit=crop" alt="Atlas Coffee commercial film still" loading="lazy" />
+              </div>
+              <span class="project__num">03</span>
+            </div>
+            <div class="project__meta">
+              <h3 class="project__name">Atlas Coffee Co.</h3>
+              <p class="project__tags">Commercial — 30s Spot</p>
+            </div>
+          </article>
+
+          <article class="project" data-cursor="view">
+            <div class="project__media">
+              <div class="project__img-wrap">
+                <img class="project__img" src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1400&q=80&auto=format&fit=crop" alt="Sofia & James wedding film still" loading="lazy" />
+              </div>
+              <span class="project__num">04</span>
+            </div>
+            <div class="project__meta">
+              <h3 class="project__name">Sofia &amp; James</h3>
+              <p class="project__tags">Wedding — Big Sur, CA</p>
+            </div>
+          </article>
+
+          <article class="project" data-cursor="view">
+            <div class="project__media">
+              <div class="project__img-wrap">
+                <img class="project__img" src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1400&q=80&auto=format&fit=crop" alt="Vantage Summit conference film still" loading="lazy" />
+              </div>
+              <span class="project__num">05</span>
+            </div>
+            <div class="project__meta">
+              <h3 class="project__name">Vantage Summit</h3>
+              <p class="project__tags">Corporate — Event Film</p>
+            </div>
+          </article>
+
+          <article class="project project--cta" data-cursor="view">
+            <a href="#contact" class="project__all">
+              <span class="project__all-text">All<br/>projects</span>
+              <span class="project__all-arrow">→</span>
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="services" id="services">
+      <div class="services__header">
+        <span class="section-label"><i>03</i> — What I do</span>
+        <h2 class="services__title" data-split-chars>SERVICES</h2>
+      </div>
+
+      <div class="services__list">
+        <div class="service" data-service data-img="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=900&q=80&auto=format&fit=crop">
+          <div class="service__row">
+            <span class="service__num">(01)</span>
+            <h3 class="service__name">Wedding Films</h3>
+            <span class="service__plus">+</span>
+          </div>
+          <div class="service__body">
+            <p>Documentary-style wedding films that feel like the day — not a highlight reel of someone else's. Full ceremonies, drone coverage, same-day edits, and feature films cut to your story.</p>
+            <ul class="service__details">
+              <li>Feature film (8–15 min)</li>
+              <li>Teaser &amp; social cuts</li>
+              <li>Drone + multi-cam</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service" data-service data-img="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&q=80&auto=format&fit=crop">
+          <div class="service__row">
+            <span class="service__num">(02)</span>
+            <h3 class="service__name">Commercial</h3>
+            <span class="service__plus">+</span>
+          </div>
+          <div class="service__body">
+            <p>Concept-to-delivery brand films and product spots. I direct, shoot, and edit work designed to stop the scroll and move the metric that matters to you.</p>
+            <ul class="service__details">
+              <li>Brand films &amp; spots</li>
+              <li>Product / lifestyle</li>
+              <li>Social-first vertical</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="service" data-service data-img="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&q=80&auto=format&fit=crop">
+          <div class="service__row">
+            <span class="service__num">(03)</span>
+            <h3 class="service__name">Corporate</h3>
+            <span class="service__plus">+</span>
+          </div>
+          <div class="service__body">
+            <p>Culture pieces, executive interviews, event recaps, and internal comms that people actually watch. Clean, fast turnarounds for teams that move quickly.</p>
+            <ul class="service__details">
+              <li>Brand &amp; culture stories</li>
+              <li>Conferences &amp; events</li>
+              <li>Interview / testimonial</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-preview" id="servicePreview" aria-hidden="true">
+        <img class="service-preview__img" id="servicePreviewImg" src="" alt="" />
+      </div>
+    </section>
+
+    <!-- ============ SHOWREEL ============ -->
+    <section class="showreel" id="showreel">
+      <div class="showreel__header">
+        <span class="section-label section-label--center"><i>04</i> — Showreel ’26</span>
+      </div>
+      <div class="showreel__stage" id="showreelStage" data-cursor="play">
+        <!-- TODO: replace src + poster with Junior's actual showreel -->
+        <video
+          class="showreel__video"
+          id="showreelVideo"
+          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+          poster="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1600&q=80&auto=format&fit=crop"
+          playsinline
+          loop
+          muted
+          preload="metadata"
+        ></video>
+        <button class="showreel__play" id="showreelPlay" aria-label="Play showreel">
+          <span class="showreel__play-inner">PLAY</span>
+        </button>
+      </div>
+      <p class="showreel__caption">Sound on. Best experienced fullscreen.</p>
+    </section>
+
+    <!-- ============ TESTIMONIAL ============ -->
+    <section class="quote">
+      <div class="quote__inner">
+        <p class="quote__text" data-words-reveal>
+          “We hired a videographer. We got a filmmaker. Junior delivered a wedding film that
+          our whole family still rewatches — twice a year, minimum.”
+        </p>
+        <span class="quote__author">— Elena R., bride &amp; repeat client</span>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT / FOOTER ============ -->
+    <footer class="contact" id="contact">
+      <div class="contact__inner">
+        <span class="section-label"><i>05</i> — Next step</span>
+        <h2 class="contact__title">
+          <span class="contact__title-line" data-split-chars>LET’S MAKE</span>
+          <span class="contact__title-line contact__title-line--accent" data-split-chars>A FILM</span>
+        </h2>
+        <a href="mailto:hello@juniorcortez.film" class="contact__btn" data-magnetic data-cursor="hide">
+          <span class="contact__btn-fill"></span>
+          <span class="contact__btn-text">hello@juniorcortez.film</span>
+        </a>
+        <div class="contact__grid">
+          <div class="contact__col">
+            <span class="contact__col-title">Based in</span>
+            <p>Los Angeles, CA<br/>Available worldwide</p>
+          </div>
+          <div class="contact__col">
+            <span class="contact__col-title">Socials</span>
+            <a href="https://instagram.com" target="_blank" rel="noopener" data-hover-line>Instagram</a>
+            <a href="https://vimeo.com" target="_blank" rel="noopener" data-hover-line>Vimeo</a>
+            <a href="https://youtube.com" target="_blank" rel="noopener" data-hover-line>YouTube</a>
+          </div>
+          <div class="contact__col">
+            <span class="contact__col-title">Booking</span>
+            <p>2026–2027 dates open<br/>Weddings book 6–12 mo out</p>
+          </div>
+        </div>
+        <div class="contact__bottom">
+          <span>© 2026 Junior Cortez</span>
+          <button id="backToTop" class="contact__top" data-magnetic>Back to top ↑</button>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- ============ LIBS (CDN) ============ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <script src="js/three-hero.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
