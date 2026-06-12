@@ -585,8 +585,10 @@
         ease: "none",
         scrollTrigger: {
           trigger: contactSig,
-          start: "top 92%",
-          end: "top 55%",
+          start: "top bottom",
+          // finish exactly at max scroll so the signature is never left
+          // partially clipped at the bottom of the page
+          end: () => ScrollTrigger.maxScroll(window),
           scrub: 0.6,
         },
       });

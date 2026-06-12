@@ -394,7 +394,7 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
 .hero__title {
   font-family: var(--font-heading);
   font-weight: 400; /* Archivo Black is single-weight ultra bold */
-  font-size: clamp(2.8rem, 10vw, 9.5rem);
+  font-size: clamp(3rem, 11vw, 10.5rem);
   line-height: 0.95;
   letter-spacing: -0.01em;
   text-transform: uppercase;
@@ -521,8 +521,9 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
 }
 
 .manifesto__stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  display: flex;
+  justify-content: center;
+  text-align: center;
   gap: 2rem;
   margin-top: clamp(4rem, 8vw, 7rem);
   padding-top: 3rem;
@@ -1044,7 +1045,9 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
 }
 
 .contact__sig {
-  width: clamp(16rem, 38vw, 30rem);
+  display: block;
+  width: clamp(9rem, 18vw, 14rem);
+  max-width: 100%;
   height: auto;
   margin-top: clamp(4rem, 8vw, 6rem);
   opacity: 0.9;
