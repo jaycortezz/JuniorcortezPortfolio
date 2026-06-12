@@ -345,6 +345,75 @@
   const backToTop = document.getElementById("backToTop");
   if (backToTop) backToTop.addEventListener("click", () => scrollToTarget(0));
 
+  /* ------------------------------------------------------------------
+     Film lightbox — click a project card, watch it without leaving
+  ------------------------------------------------------------------ */
+  const lightbox = document.getElementById("lightbox");
+  const lightboxFrame = document.getElementById("lightboxFrame");
+  const lightboxTitle = document.getElementById("lightboxTitle");
+  let lightboxOpen = false;
+
+  function setLightboxVisible(visible) {
+    const backdrop = lightbox.querySelector(".lightbox__backdrop");
+    const inner = lightbox.querySelector(".lightbox__inner");
+    if (hasGsap && !reduceMotion) {
+      if (visible) {
+        lightbox.classList.add("is-open");
+        gsap.to(backdrop, { opacity: 1, duration: 0.4, ease: "power2.out" });
+        gsap.fromTo(inner,
+          { opacity: 0, scale: 0.94, y: 24 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.55, ease: "power3.out", delay: 0.08 });
+      } else {
+        gsap.to(inner, { opacity: 0, scale: 0.96, y: 12, duration: 0.3, ease: "power2.in" });
+        gsap.to(backdrop, {
+          opacity: 0, duration: 0.35, delay: 0.1, ease: "power2.in",
+          onComplete: () => lightbox.classList.remove("is-open"),
+        });
+      }
+    } else {
+      lightbox.classList.toggle("is-open", visible);
+      backdrop.style.opacity = visible ? 1 : 0;
+      inner.style.opacity = visible ? 1 : 0;
+      inner.style.transform = "none";
+    }
+  }
+
+  function openFilm(videoId, title) {
+    if (!lightbox || !videoId) return;
+    lightboxTitle.textContent = title || "";
+    lightboxFrame.innerHTML =
+      '<iframe src="https://www.youtube-nocookie.com/embed/' + videoId +
+      '?autoplay=1&rel=0&modestbranding=1&playsinline=1" ' +
+      'title="' + (title || "Film") + '" allow="autoplay; fullscreen; encrypted-media" allowfullscreen></iframe>';
+    lightbox.setAttribute("aria-hidden", "false");
+    lightboxOpen = true;
+    if (lenis) lenis.stop();
+    document.documentElement.style.overflow = "hidden";
+    setLightboxVisible(true);
+  }
+
+  function closeFilm() {
+    if (!lightboxOpen) return;
+    lightboxOpen = false;
+    lightbox.setAttribute("aria-hidden", "true");
+    setLightboxVisible(false);
+    // drop the iframe so playback stops immediately
+    setTimeout(() => { lightboxFrame.innerHTML = ""; }, 350);
+    if (lenis) lenis.start();
+    document.documentElement.style.overflow = "";
+  }
+
+  if (lightbox) {
+    document.querySelectorAll("[data-video]").forEach((card) => {
+      card.addEventListener("click", () => openFilm(card.dataset.video, card.dataset.title));
+    });
+    document.getElementById("lightboxClose").addEventListener("click", closeFilm);
+    document.getElementById("lightboxBackdrop").addEventListener("click", closeFilm);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && lightboxOpen) closeFilm();
+    });
+  }
+
   /* ==================================================================
      SCROLL-DRIVEN ANIMATIONS (everything below needs GSAP + ST)
   ================================================================== */
