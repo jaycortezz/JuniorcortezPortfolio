@@ -658,7 +658,7 @@
      Set FORM_ENDPOINT to a Formspree (or similar) URL to submit via
      fetch; left empty, the form opens a pre-filled email instead.
   ------------------------------------------------------------------ */
-  const FORM_ENDPOINT = ""; // e.g. "https://formspree.io/f/xxxxxxxx"
+  const FORM_ENDPOINT = "https://formspree.io/f/mzdqkeaj";
   const CONTACT_EMAIL = "hello@juniorcortez.film";
 
   const form = document.getElementById("contactForm");
