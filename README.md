@@ -22,7 +22,7 @@ A single-page, award-style portfolio experience for videographer **Junior Cortez
 - **Velocity marquee** — speeds up with scroll velocity
 - **Manifesto** — word-by-word scrub reveal + animated stat counters
 - **Selected Work** — pinned horizontal scroll gallery with per-card parallax (swipeable row on mobile)
-- **Services** — accordion rows with a mouse-following image preview
+- **Services** — accordion rows with hover slide and gold highlight
 - **Showreel** — scrub-scales into frame, click to play with sound
 - **Film grain** overlay, `prefers-reduced-motion` respected throughout, graceful fallbacks when WebGL/CDNs are unavailable
 
@@ -41,10 +41,8 @@ Everything marked below is demo content for Junior to swap:
 
 1. **Showreel video** — `index.html`, `#showreelVideo` `src` + `poster` (currently a Google sample clip)
 2. **Project images** — `.project__img` Unsplash URLs in the Work section
-3. **Service preview images** — `data-img` attributes on `.service` rows
-4. **Email / socials** — `hello@juniorcortez.film` and Instagram/Vimeo/YouTube links (menu + footer)
-5. **Stats** — `data-counter` values in the Manifesto section
-6. **Location** — "Los Angeles, CA" in the nav and footer
-7. **Contact form backend** — set `FORM_ENDPOINT` at the bottom of `js/main.js`
+3. **Email / socials** — `hello@juniorcortez.film` and Instagram/Vimeo/YouTube links (menu + footer)
+4. **Stats** — `data-counter` values in the Manifesto section
+5. **Contact form backend** — set `FORM_ENDPOINT` at the bottom of `js/main.js`
    to a [Formspree](https://formspree.io) (or similar) URL. Until then the form
    validates client-side and opens the visitor's mail client pre-filled.

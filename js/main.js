@@ -204,7 +204,10 @@
   setInterval(() => {
     const now = new Date();
     if (navTime) {
-      navTime.textContent = now.toLocaleTimeString("en-US", { hour12: false });
+      navTime.textContent = now.toLocaleTimeString("en-US", {
+        hour12: false,
+        timeZone: "America/Los_Angeles", // Portland, OR — Pacific time
+      });
     }
   }, 1000);
   setInterval(() => {
@@ -443,9 +446,7 @@
     });
   }
 
-  /* --- services: accordion + mouse-following image preview --- */
-  const preview = document.getElementById("servicePreview");
-  const previewImg = document.getElementById("servicePreviewImg");
+  /* --- services: accordion --- */
   const services = document.querySelectorAll("[data-service]");
 
   services.forEach((service) => {
@@ -470,26 +471,7 @@
         ease: "power3.inOut",
       });
     });
-
-    if (!isTouch && preview && previewImg) {
-      service.addEventListener("pointerenter", () => {
-        previewImg.src = service.dataset.img;
-        gsap.to(preview, { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" });
-      });
-      service.addEventListener("pointerleave", () => {
-        gsap.to(preview, { opacity: 0, scale: 0.85, duration: 0.35, ease: "power3.in" });
-      });
-    }
   });
-
-  if (!isTouch && preview) {
-    const px = gsap.quickTo(preview, "x", { duration: 0.6, ease: "power3.out" });
-    const py = gsap.quickTo(preview, "y", { duration: 0.6, ease: "power3.out" });
-    window.addEventListener("pointermove", (e) => {
-      px(e.clientX + 30);
-      py(e.clientY - preview.offsetHeight / 2);
-    });
-  }
 
   /* --- service rows slide in --- */
   gsap.utils.toArray(".service").forEach((row, i) => {
