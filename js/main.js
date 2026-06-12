@@ -198,6 +198,13 @@
         label.textContent = "";
       });
     });
+
+    // embedded players are cross-origin iframes that swallow pointer events,
+    // which would freeze the ring mid-screen — hide it over them instead
+    document.querySelectorAll("#showreelStage, .lightbox__frame").forEach((zone) => {
+      zone.addEventListener("pointerenter", () => cursor.classList.add("is-hidden"));
+      zone.addEventListener("pointerleave", () => cursor.classList.remove("is-hidden"));
+    });
   } else if (cursor) {
     cursor.style.display = "none";
   }
