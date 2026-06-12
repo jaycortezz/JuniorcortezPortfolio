@@ -1,6 +1,6 @@
 /* ==========================================================================
    HERO — Three.js shader backdrop
-   A slow, smoky fbm-noise gradient (charcoal → champagne gold) that drifts
+   A slow, smoky fbm-noise gradient (ink black → ice blue) that drifts
    with time and leans toward the cursor. Falls back to a CSS gradient if
    WebGL or the Three.js CDN is unavailable.
    ========================================================================== */
@@ -13,7 +13,7 @@
 
   if (typeof THREE === "undefined" || reduceMotion) {
     canvas.style.background =
-      "radial-gradient(120% 90% at 70% 20%, #2a2118 0%, #0b0a08 60%)";
+      "radial-gradient(120% 90% at 70% 20%, #122430 0%, #02111b 60%)";
     return;
   }
 
@@ -22,7 +22,7 @@
     renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false });
   } catch (e) {
     canvas.style.background =
-      "radial-gradient(120% 90% at 70% 20%, #2a2118 0%, #0b0a08 60%)";
+      "radial-gradient(120% 90% at 70% 20%, #122430 0%, #02111b 60%)";
     return;
   }
 
@@ -93,14 +93,14 @@
         vec2 q = vec2(fbm(p * 1.6 + t), fbm(p * 1.6 - t * 0.7));
         float n = fbm(p * 2.2 + q * 1.4 + pull * 0.35 + t * 0.5);
 
-        // palette: deep charcoal -> warm umber -> champagne gold
-        vec3 cBase = vec3(0.043, 0.039, 0.031);   // #0b0a08
-        vec3 cWarm = vec3(0.180, 0.135, 0.082);   // umber
-        vec3 cGold = vec3(0.788, 0.639, 0.416);   // #c9a36a
+        // palette: ink black -> deep slate blue -> ice
+        vec3 cBase = vec3(0.008, 0.067, 0.106);   // #02111b
+        vec3 cMid  = vec3(0.106, 0.180, 0.235);   // deep slate blue
+        vec3 cIce  = vec3(0.663, 0.769, 0.831);   // #a9c4d4
 
-        vec3 col = mix(cBase, cWarm, smoothstep(0.15, 0.75, n));
-        col = mix(col, cGold, smoothstep(0.62, 0.95, n) * 0.55);
-        col += cGold * pull * 0.08;
+        vec3 col = mix(cBase, cMid, smoothstep(0.15, 0.75, n));
+        col = mix(col, cIce, smoothstep(0.62, 0.95, n) * 0.5);
+        col += cIce * pull * 0.07;
 
         // vignette to keep type legible
         float vig = smoothstep(1.25, 0.35, distance(uv, vec2(0.5, 0.45)));

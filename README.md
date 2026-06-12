@@ -14,15 +14,16 @@ A single-page, award-style portfolio experience for videographer **Junior Cortez
 
 ## Experience highlights
 
-- **Preloader** — JC monogram rise, 0–100% counter, split-curtain reveal into the hero
-- **Three.js hero** — mouse-reactive smoky gradient shader (charcoal → champagne gold), camera-HUD framing (REC dot, live timecode), per-character title reveal
+- **Preloader** — signature logo "writes itself" in, 0–100% counter, split-curtain reveal into the hero
+- **Signature logo** — Junior's handwritten mark (`assets/logo.png`) writes in on load in the nav and again on scroll in the footer
+- **Three.js hero** — mouse-reactive smoky gradient shader (ink black → ice blue), camera-HUD framing (REC dot, live timecode), per-character title reveal
 - **Custom cursor** — eased dot + ring with contextual `VIEW` / `PLAY` states
 - **Magnetic elements** — logo, menu button, CTAs pull toward the cursor with elastic release
 - **Fullscreen menu** — curtain wipe, staggered links, scramble-text hover
 - **Velocity marquee** — speeds up with scroll velocity
 - **Manifesto** — word-by-word scrub reveal + animated stat counters
 - **Selected Work** — pinned horizontal scroll gallery with per-card parallax (swipeable row on mobile)
-- **Services** — accordion rows with hover slide and gold highlight
+- **Services** — accordion rows with hover slide and ice-blue highlight
 - **Showreel** — scrub-scales into frame, click to play with sound
 - **Film grain** overlay, `prefers-reduced-motion` respected throughout, graceful fallbacks when WebGL/CDNs are unavailable
 

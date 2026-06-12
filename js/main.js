@@ -99,7 +99,10 @@
       .from(".hero__cta", { scale: 0.6, autoAlpha: 0, duration: 0.9, ease: "back.out(1.6)" }, "-=0.6")
       .to(".hero__frame-item", { autoAlpha: 1, duration: 0.6, stagger: 0.08 }, "-=0.7")
       .from(".hero__scroll-hint", { autoAlpha: 0, duration: 0.6 }, "-=0.4")
-      .from(".nav", { yPercent: -120, duration: 0.8, ease: "power3.out" }, "-=0.9");
+      .from(".nav", { yPercent: -120, duration: 0.8, ease: "power3.out" }, "-=0.9")
+      .fromTo(".nav__logo-img",
+        { clipPath: "inset(0 100% 0 0)" },
+        { clipPath: "inset(0 0% 0 0)", duration: 1.1, ease: "power2.inOut" }, "-=0.5");
   }
 
   let preloaderStarted = false;
@@ -122,10 +125,11 @@
       },
     });
 
-    tl.to(".preloader__char", {
-      y: 0, duration: 1, stagger: 0.12, ease: "power4.out",
-    })
-      .to(".preloader__tagline", { opacity: 1, duration: 0.6 }, "-=0.4")
+    // the signature "writes itself" left to right
+    tl.fromTo(".preloader__sig",
+      { clipPath: "inset(0 100% 0 0)" },
+      { clipPath: "inset(0 0% 0 0)", duration: 1.6, ease: "power1.inOut" })
+      .to(".preloader__tagline", { opacity: 1, duration: 0.6 }, "-=0.6")
       .to(counter, {
         v: 100,
         duration: 1.8,
@@ -547,6 +551,23 @@
     ease: "power3.out",
     scrollTrigger: { trigger: ".form", start: "top 85%", once: true },
   });
+  /* --- footer signature writes in as you scroll --- */
+  const contactSig = document.getElementById("contactSig");
+  if (contactSig) {
+    gsap.fromTo(contactSig,
+      { clipPath: "inset(0 100% 0 0)" },
+      {
+        clipPath: "inset(0 0% 0 0)",
+        ease: "none",
+        scrollTrigger: {
+          trigger: contactSig,
+          start: "top 92%",
+          end: "top 55%",
+          scrub: 0.6,
+        },
+      });
+  }
+
   gsap.from(".contact__col", {
     y: 30,
     autoAlpha: 0,
