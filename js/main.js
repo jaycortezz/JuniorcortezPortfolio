@@ -14,6 +14,9 @@
 
   if (hasGsap && typeof ScrollTrigger !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
+  } else {
+    // CDN failed or blocked — neutralize all animation-hidden states via CSS
+    document.documentElement.classList.add("no-anim");
   }
 
   /* ------------------------------------------------------------------
@@ -99,7 +102,10 @@
       .from(".nav", { yPercent: -120, duration: 0.8, ease: "power3.out" }, "-=0.9");
   }
 
+  let preloaderStarted = false;
   function runPreloader() {
+    if (preloaderStarted) return;
+    preloaderStarted = true;
     if (!hasGsap || reduceMotion) {
       if (preloader) preloader.remove();
       heroEntrance();

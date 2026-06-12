@@ -1094,6 +1094,25 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
 .contact__top:hover { color: var(--accent); }
 
 /* ==========================================================================
+   NO-ANIMATION FALLBACK
+   Applied by main.js when GSAP fails to load (offline / blocked CDN) —
+   every element that animation would have revealed must be visible.
+   ========================================================================== */
+
+.no-anim .char { transform: none; }
+.no-anim .word-reveal { opacity: 1; }
+.no-anim .stat { opacity: 1; transform: none; }
+.no-anim .hero__frame-item,
+.no-anim .menu__footer { opacity: 1; }
+.no-anim .menu__link { transform: none; }
+.no-anim .menu__bg { transform: none; }
+.no-anim .menu.is-open { visibility: visible; pointer-events: auto; }
+.no-anim .showreel__stage { transform: none; }
+.no-anim .preloader { display: none; }
+.no-anim .service.is-open .service__body { max-height: none; }
+.no-anim [data-counter] { visibility: visible; }
+
+/* ==========================================================================
    REDUCED MOTION
    ========================================================================== */
 
