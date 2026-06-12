@@ -254,6 +254,16 @@
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && menuOpen) setMenu(false);
     });
+  } else if (menu && menuToggle) {
+    // no GSAP — plain class toggle, styled by the .no-anim CSS fallback
+    menuToggle.addEventListener("click", () => {
+      menuOpen = !menuOpen;
+      menu.classList.toggle("is-open", menuOpen);
+      document.body.classList.toggle("menu-open", menuOpen);
+      menuToggle.setAttribute("aria-expanded", String(menuOpen));
+      menu.setAttribute("aria-hidden", String(!menuOpen));
+      menuToggle.querySelector(".nav__toggle-label").textContent = menuOpen ? "Close" : "Menu";
+    });
 
     document.querySelectorAll("[data-menu-link]").forEach((link) => {
       link.addEventListener("click", (e) => {
