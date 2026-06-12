@@ -42,7 +42,7 @@ Everything marked below is demo content for Junior to swap:
 
 1. **Showreel video** — `index.html`, `#showreelVideo` `src` + `poster` (currently a Google sample clip)
 2. **Project films** — each Work card carries `data-video` (YouTube ID) and `data-title`; cards open in the on-site lightbox player
-3. **Email / socials** — `hello@juniorcortez.film` and Instagram/Vimeo/YouTube links (menu + footer)
+3. **Socials** — Instagram/Vimeo/YouTube links currently point at platform homepages (menu + footer)
 4. **Stats** — `data-counter` values in the Manifesto section
 5. **Contact form backend** — set `FORM_ENDPOINT` at the bottom of `js/main.js`
    to a [Formspree](https://formspree.io) (or similar) URL. Until then the form

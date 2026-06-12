@@ -659,7 +659,7 @@
      fetch; left empty, the form opens a pre-filled email instead.
   ------------------------------------------------------------------ */
   const FORM_ENDPOINT = "https://formspree.io/f/mzdqkeaj";
-  const CONTACT_EMAIL = "hello@juniorcortez.film";
+  const CONTACT_EMAIL = "jxtezmedia@gmail.com";
 
   const form = document.getElementById("contactForm");
   const formStatus = document.getElementById("formStatus");
