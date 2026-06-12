@@ -540,13 +540,14 @@
     });
   });
 
-  /* --- contact button + grid entrance --- */
-  gsap.from(".contact__btn", {
-    scale: 0.85,
+  /* --- contact form entrance --- */
+  gsap.from(".form__field, .form__pills, .form__footer", {
+    y: 36,
     autoAlpha: 0,
-    duration: 0.9,
-    ease: "back.out(1.4)",
-    scrollTrigger: { trigger: ".contact__btn", start: "top 90%", once: true },
+    duration: 0.8,
+    stagger: 0.08,
+    ease: "power3.out",
+    scrollTrigger: { trigger: ".form", start: "top 85%", once: true },
   });
   gsap.from(".contact__col", {
     y: 30,
@@ -556,6 +557,116 @@
     ease: "power3.out",
     scrollTrigger: { trigger: ".contact__grid", start: "top 90%", once: true },
   });
+
+  /* ------------------------------------------------------------------
+     Contact form
+     Set FORM_ENDPOINT to a Formspree (or similar) URL to submit via
+     fetch; left empty, the form opens a pre-filled email instead.
+  ------------------------------------------------------------------ */
+  const FORM_ENDPOINT = ""; // e.g. "https://formspree.io/f/xxxxxxxx"
+  const CONTACT_EMAIL = "hello@juniorcortez.film";
+
+  const form = document.getElementById("contactForm");
+  const formStatus = document.getElementById("formStatus");
+  const formSuccess = document.getElementById("formSuccess");
+
+  if (form) {
+    function flagError(el) {
+      el.classList.add("is-error");
+      el.addEventListener("animationend", () => el.classList.remove("is-error"), { once: true });
+    }
+
+    function validate() {
+      let firstBad = null;
+      const name = form.querySelector("#fName");
+      const email = form.querySelector("#fEmail");
+      const message = form.querySelector("#fMessage");
+      const pills = document.getElementById("formService");
+
+      [[name, (v) => v.trim().length > 1],
+       [email, (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)],
+       [message, (v) => v.trim().length > 3]].forEach(([input, ok]) => {
+        if (!ok(input.value)) {
+          flagError(input.closest(".form__field"));
+          firstBad = firstBad || input;
+        }
+      });
+
+      if (!form.querySelector('input[name="service"]:checked')) {
+        flagError(pills);
+        firstBad = firstBad || pills.querySelector("input");
+      }
+      return firstBad;
+    }
+
+    function showSuccess() {
+      formSuccess.setAttribute("aria-hidden", "false");
+      if (hasGsap) {
+        gsap.to(form, {
+          autoAlpha: 0,
+          y: -24,
+          duration: 0.5,
+          ease: "power3.in",
+          onComplete: () => {
+            form.style.display = "none";
+            formSuccess.style.display = "block";
+            gsap.from(formSuccess.children, {
+              y: 30, autoAlpha: 0, duration: 0.8, stagger: 0.1, ease: "power3.out",
+            });
+          },
+        });
+      } else {
+        form.style.display = "none";
+        formSuccess.style.display = "block";
+      }
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      formStatus.textContent = "";
+
+      const firstBad = validate();
+      if (firstBad) {
+        formStatus.textContent = "A couple of fields need attention.";
+        firstBad.focus({ preventScroll: true });
+        return;
+      }
+
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      if (!FORM_ENDPOINT) {
+        // no backend configured — hand off to the visitor's mail client
+        const subject = `${data.service || "Project"} inquiry — ${data.name}`;
+        const body =
+          `Name: ${data.name}\nEmail: ${data.email}\nService: ${data.service || "-"}\n` +
+          `Date: ${data.date || "-"}\nBudget: ${data.budget || "-"}\n\n${data.message}`;
+        window.location.href =
+          `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        showSuccess();
+        return;
+      }
+
+      const submitBtn = form.querySelector(".form__submit");
+      const btnText = submitBtn.querySelector(".contact__btn-text");
+      submitBtn.disabled = true;
+      btnText.textContent = "Sending…";
+
+      try {
+        const res = await fetch(FORM_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error("Request failed: " + res.status);
+        showSuccess();
+      } catch (err) {
+        formStatus.textContent =
+          "Something went wrong — please email " + CONTACT_EMAIL + " directly.";
+        submitBtn.disabled = false;
+        btnText.textContent = "Send it →";
+      }
+    });
+  }
 
   // Recalculate pinned distances once everything (fonts, images) settles
   window.addEventListener("load", () => ScrollTrigger.refresh());

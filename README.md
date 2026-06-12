@@ -45,3 +45,6 @@ Everything marked below is demo content for Junior to swap:
 4. **Email / socials** — `hello@juniorcortez.film` and Instagram/Vimeo/YouTube links (menu + footer)
 5. **Stats** — `data-counter` values in the Manifesto section
 6. **Location** — "Los Angeles, CA" in the nav and footer
+7. **Contact form backend** — set `FORM_ENDPOINT` at the bottom of `js/main.js`
+   to a [Formspree](https://formspree.io) (or similar) URL. Until then the form
+   validates client-side and opens the visitor's mail client pre-filled.

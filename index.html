@@ -347,10 +347,63 @@
           <span class="contact__title-line" data-split-chars>LET’S MAKE</span>
           <span class="contact__title-line contact__title-line--accent" data-split-chars>A FILM</span>
         </h2>
-        <a href="mailto:hello@juniorcortez.film" class="contact__btn" data-magnetic data-cursor="hide">
-          <span class="contact__btn-fill"></span>
-          <span class="contact__btn-text">hello@juniorcortez.film</span>
-        </a>
+        <form class="form" id="contactForm" novalidate>
+          <div class="form__row">
+            <div class="form__field">
+              <input type="text" id="fName" name="name" class="form__input" placeholder=" " autocomplete="name" required />
+              <label for="fName" class="form__label">Your name</label>
+              <span class="form__line"></span>
+            </div>
+            <div class="form__field">
+              <input type="email" id="fEmail" name="email" class="form__input" placeholder=" " autocomplete="email" required />
+              <label for="fEmail" class="form__label">Email address</label>
+              <span class="form__line"></span>
+            </div>
+          </div>
+
+          <fieldset class="form__pills" id="formService">
+            <legend class="form__legend">What are we making?</legend>
+            <label class="pill"><input type="radio" name="service" value="Wedding" /><span>Wedding</span></label>
+            <label class="pill"><input type="radio" name="service" value="Commercial" /><span>Commercial</span></label>
+            <label class="pill"><input type="radio" name="service" value="Corporate" /><span>Corporate</span></label>
+            <label class="pill"><input type="radio" name="service" value="Something else" /><span>Something else</span></label>
+          </fieldset>
+
+          <div class="form__row">
+            <div class="form__field">
+              <input type="text" id="fDate" name="date" class="form__input" placeholder=" " />
+              <label for="fDate" class="form__label">Shoot date (if known)</label>
+              <span class="form__line"></span>
+            </div>
+            <div class="form__field">
+              <input type="text" id="fBudget" name="budget" class="form__input" placeholder=" " />
+              <label for="fBudget" class="form__label">Budget range</label>
+              <span class="form__line"></span>
+            </div>
+          </div>
+
+          <div class="form__field form__field--full">
+            <textarea id="fMessage" name="message" class="form__input form__input--area" placeholder=" " rows="3" required></textarea>
+            <label for="fMessage" class="form__label">Tell me about the project</label>
+            <span class="form__line"></span>
+          </div>
+
+          <div class="form__footer">
+            <button type="submit" class="contact__btn form__submit" data-magnetic>
+              <span class="contact__btn-fill"></span>
+              <span class="contact__btn-text">Send it →</span>
+            </button>
+            <span class="form__alt">or email <a href="mailto:hello@juniorcortez.film" data-hover-line>hello@juniorcortez.film</a></span>
+          </div>
+
+          <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="form-success" id="formSuccess" aria-hidden="true">
+          <span class="form-success__mark">✦</span>
+          <h3 class="form-success__title">Talk soon.</h3>
+          <p class="form-success__text">Your message is on its way — Junior replies within 48 hours.</p>
+        </div>
         <div class="contact__grid">
           <div class="contact__col">
             <span class="contact__col-title">Based in</span>

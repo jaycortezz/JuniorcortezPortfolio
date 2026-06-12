@@ -894,6 +894,169 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
 .contact__btn-text { position: relative; transition: color 0.4s; }
 .contact__btn:hover .contact__btn-text { color: var(--bg); }
 
+/* --- contact form --- */
+
+.form {
+  max-width: 52rem;
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+@media (max-width: 640px) { .form__row { grid-template-columns: 1fr; } }
+
+.form__field {
+  position: relative;
+  padding-top: 1.4rem;
+  margin-bottom: 2.2rem;
+}
+.form__field--full { width: 100%; }
+
+.form__input {
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  padding: 0.6rem 0;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.05rem;
+  color: var(--ink);
+  outline: none;
+  border-radius: 0;
+}
+.form__input--area { resize: vertical; min-height: 3rem; }
+
+.form__label {
+  position: absolute;
+  left: 0;
+  top: 1.9rem;
+  font-size: 1rem;
+  color: var(--ink-dim);
+  pointer-events: none;
+  transition: top 0.35s var(--ease-out), font-size 0.35s var(--ease-out), color 0.35s, letter-spacing 0.35s;
+}
+.form__input:focus ~ .form__label,
+.form__input:not(:placeholder-shown) ~ .form__label {
+  top: 0;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.form__line {
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-expo);
+}
+.form__input:focus ~ .form__line { transform: scaleX(1); }
+
+.form__field.is-error .form__input { border-bottom-color: rgba(224, 72, 62, 0.6); }
+.form__field.is-error .form__label { color: #e0483e; }
+
+/* service pills */
+.form__pills {
+  border: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-bottom: 2.4rem;
+}
+.form__legend {
+  width: 100%;
+  font-size: 0.68rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 1rem;
+}
+.pill { position: relative; }
+.pill input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.pill span {
+  display: inline-block;
+  padding: 0.65rem 1.4rem;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.35s, color 0.35s, background-color 0.35s, transform 0.25s var(--ease-out);
+}
+.pill:hover span { border-color: var(--accent); transform: translateY(-2px); }
+.pill input:checked + span {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+.pill input:focus-visible + span { outline: 1px solid var(--accent); outline-offset: 3px; }
+
+.form__footer {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.form__submit { border-radius: 100px; }
+.form__submit:disabled { opacity: 0.5; pointer-events: none; }
+.form__alt { font-size: 0.85rem; color: var(--ink-dim); }
+.form__alt a { color: var(--ink); }
+
+.form__status {
+  margin-top: 1.2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-dim);
+  min-height: 1.2em;
+}
+
+/* success state */
+.form-success {
+  display: none;
+  max-width: 52rem;
+  padding: clamp(2.5rem, 6vw, 4rem) 0;
+}
+.form-success__mark {
+  display: block;
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+.form-success__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+.form-success__text {
+  margin-top: 0.8rem;
+  color: var(--ink-dim);
+}
+
+@keyframes field-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-7px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(3px); }
+}
+.form__field.is-error,
+.form__pills.is-error { animation: field-shake 0.45s var(--ease-out); }
+
 .contact__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
