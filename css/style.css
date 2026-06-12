@@ -751,32 +751,8 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
 .showreel__video {
   width: 100%; height: 100%;
   object-fit: cover;
-}
-.showreel__play {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background: rgba(11, 10, 8, 0.35);
-  transition: opacity 0.5s, visibility 0.5s;
-}
-.showreel__play.is-hidden { opacity: 0; visibility: hidden; }
-.showreel__play-inner {
-  display: grid;
-  place-items: center;
-  width: 7rem; height: 7rem;
-  border: 1px solid var(--ink);
-  border-radius: 50%;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 0.8rem;
-  letter-spacing: 0.3em;
-  transition: background-color 0.4s, color 0.4s, transform 0.4s var(--ease-out);
-}
-.showreel__play:hover .showreel__play-inner {
-  background: var(--ink);
-  color: var(--bg);
-  transform: scale(1.08);
+  border: 0;
+  display: block;
 }
 .showreel__caption {
   text-align: center;

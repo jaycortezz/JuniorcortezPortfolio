@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Syne:wght@400..800&family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=8" />
+  <link rel="stylesheet" href="css/style.css?v=9" />
 </head>
 <body data-theme="dark">
 
@@ -294,21 +294,14 @@
       <div class="showreel__header">
         <span class="section-label section-label--center"><i>04</i> — Showreel ’26</span>
       </div>
-      <div class="showreel__stage" id="showreelStage" data-cursor="play">
-        <!-- TODO: replace src + poster with Junior's actual showreel -->
-        <video
+      <div class="showreel__stage" id="showreelStage">
+        <iframe
           class="showreel__video"
-          id="showreelVideo"
-          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
-          poster="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1600&q=80&auto=format&fit=crop"
-          playsinline
-          loop
-          muted
-          preload="metadata"
-        ></video>
-        <button class="showreel__play" id="showreelPlay" aria-label="Play showreel">
-          <span class="showreel__play-inner">PLAY</span>
-        </button>
+          src="https://drive.google.com/file/d/1vlOh8-rhF_cF6fcSv804YmWLK1lR6gbz/preview"
+          title="2026 Junior Cortez Reel"
+          allow="autoplay; fullscreen; encrypted-media"
+          allowfullscreen
+        ></iframe>
       </div>
       <p class="showreel__caption">Sound on. Best experienced fullscreen.</p>
     </section>
@@ -432,7 +425,7 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-  <script src="js/three-hero.js?v=8"></script>
-  <script src="js/main.js?v=8"></script>
+  <script src="js/three-hero.js?v=9"></script>
+  <script src="js/main.js?v=9"></script>
 </body>
 </html>

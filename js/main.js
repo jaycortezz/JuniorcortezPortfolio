@@ -582,10 +582,8 @@
     });
   });
 
-  /* --- showreel: scales up as it enters, plays on click --- */
+  /* --- showreel: scales up as it enters (Drive embed handles playback) --- */
   const stage = document.getElementById("showreelStage");
-  const video = document.getElementById("showreelVideo");
-  const playBtn = document.getElementById("showreelPlay");
 
   if (stage) {
     gsap.to(stage, {
@@ -597,30 +595,6 @@
         end: "top 35%",
         scrub: 0.8,
       },
-    });
-  }
-
-  if (video && playBtn) {
-    let playing = false;
-    stage.addEventListener("click", () => {
-      if (!playing) {
-        video.muted = false;
-        video.play().catch(() => { video.muted = true; video.play(); });
-        playBtn.classList.add("is-hidden");
-        playing = true;
-      } else {
-        video.pause();
-        playBtn.classList.remove("is-hidden");
-        playing = false;
-      }
-    });
-    // pause when scrolled away
-    ScrollTrigger.create({
-      trigger: stage,
-      start: "top bottom",
-      end: "bottom top",
-      onLeave: () => { if (playing) { video.pause(); playBtn.classList.remove("is-hidden"); playing = false; } },
-      onLeaveBack: () => { if (playing) { video.pause(); playBtn.classList.remove("is-hidden"); playing = false; } },
     });
   }
 
