@@ -451,6 +451,17 @@
     });
   }
 
+  /* --- generic fade-up reveal (any page) --- */
+  document.querySelectorAll("[data-fade-up]").forEach((el) => {
+    gsap.from(el, {
+      y: 30,
+      autoAlpha: 0,
+      duration: 0.8,
+      ease: "power3.out",
+      scrollTrigger: { trigger: el, start: "top 90%", once: true },
+    });
+  });
+
   /* --- manifesto: word-by-word brighten on scroll --- */
   document.querySelectorAll("[data-words-reveal]").forEach((el) => {
     gsap.to(el.querySelectorAll(".word-reveal"), {
