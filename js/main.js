@@ -26,12 +26,23 @@
     const text = el.textContent;
     el.textContent = "";
     el.setAttribute("aria-label", text);
-    [...text].forEach((ch) => {
-      const span = document.createElement("span");
-      span.className = "char";
-      span.setAttribute("aria-hidden", "true");
-      span.textContent = ch === " " ? " " : ch;
-      el.appendChild(span);
+    // group each word's letters in a nowrap span so a line break (if the
+    // text ever wraps) can only happen between words, never mid-word
+    text.split(/(\s+)/).forEach((chunk) => {
+      if (/^\s+$/.test(chunk)) {
+        el.appendChild(document.createTextNode(chunk));
+        return;
+      }
+      const word = document.createElement("span");
+      word.className = "char-word";
+      [...chunk].forEach((ch) => {
+        const span = document.createElement("span");
+        span.className = "char";
+        span.setAttribute("aria-hidden", "true");
+        span.textContent = ch;
+        word.appendChild(span);
+      });
+      el.appendChild(word);
     });
     return el.querySelectorAll(".char");
   }

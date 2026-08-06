@@ -329,6 +329,7 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
   transform: translateY(115%) rotate(4deg);
   will-change: transform;
 }
+.char-word { display: inline-block; white-space: nowrap; }
 [data-split-chars] { display: inline-block; overflow: hidden; }
 
 .word-reveal { opacity: 0.12; display: inline; }
@@ -1156,12 +1157,12 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
 .re-hero__title {
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: clamp(3rem, 10vw, 8.5rem);
+  font-size: clamp(2.6rem, 8vw, 6.5rem);
   line-height: 0.95;
   letter-spacing: -0.01em;
   text-transform: uppercase;
 }
-.re-hero__title-line { display: block; }
+.re-hero__title-line { display: block; white-space: nowrap; }
 .re-hero__title-line--offset { margin-left: clamp(1.5rem, 5vw, 5rem); }
 
 .re-hero__sub-text {
