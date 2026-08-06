@@ -353,18 +353,6 @@
   if (backToTop) backToTop.addEventListener("click", () => scrollToTarget(0));
 
   /* ------------------------------------------------------------------
-     Simple horizontal carousel arrows (e.g. real estate design gallery)
-  ------------------------------------------------------------------ */
-  document.querySelectorAll("[data-carousel]").forEach((viewport) => {
-    const wrap = viewport.parentElement;
-    const prev = wrap.querySelector("[data-carousel-prev]");
-    const next = wrap.querySelector("[data-carousel-next]");
-    const step = () => viewport.clientWidth * 0.85;
-    if (prev) prev.addEventListener("click", () => viewport.scrollBy({ left: -step(), behavior: "smooth" }));
-    if (next) next.addEventListener("click", () => viewport.scrollBy({ left: step(), behavior: "smooth" }));
-  });
-
-  /* ------------------------------------------------------------------
      Film / image lightbox — click a card, view it without leaving
   ------------------------------------------------------------------ */
   const lightbox = document.getElementById("lightbox");
@@ -479,6 +467,33 @@
         drift.timeScale(gsap.utils.clamp(0.4, 4, 1 + Math.abs(self.getVelocity()) / 600));
       },
     });
+  }
+
+  /* --- design examples: continuous right-to-left marquee (e.g. real estate) --- */
+  const galleryTrack = document.querySelector("[data-gallery-marquee]");
+  if (galleryTrack && !reduceMotion) {
+    const galleryWrap = galleryTrack.parentElement;
+    // clone (not innerHTML +=) so the originals' click listeners survive
+    Array.from(galleryTrack.children).forEach((item) => {
+      const clone = item.cloneNode(true);
+      clone.setAttribute("aria-hidden", "true");
+      clone.setAttribute("tabindex", "-1");
+      clone.addEventListener("click", () => openImage(clone.dataset.image, clone.dataset.title));
+      galleryTrack.appendChild(clone);
+    });
+    galleryWrap.classList.add("is-auto");
+    const galleryHalf = galleryTrack.scrollWidth / 2;
+    const galleryDrift = gsap.to(galleryTrack, {
+      x: -galleryHalf,
+      duration: 34,
+      ease: "none",
+      repeat: -1,
+      modifiers: {
+        x: (x) => (parseFloat(x) % galleryHalf) + "px",
+      },
+    });
+    galleryWrap.addEventListener("mouseenter", () => galleryDrift.pause());
+    galleryWrap.addEventListener("mouseleave", () => galleryDrift.play());
   }
 
   /* --- generic fade-up reveal (any page) --- */

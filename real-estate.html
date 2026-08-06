@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Syne:wght@400..800&family=Inter:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/style.css?v=15" />
+  <link rel="stylesheet" href="css/style.css?v=16" />
 </head>
 <body data-theme="dark">
 
@@ -90,8 +90,8 @@
       <div class="re-hero__inner">
         <p class="re-hero__eyebrow">For Real Estate Professionals</p>
         <h1 class="re-hero__title">
-          <span class="re-hero__title-line" data-split-chars>LISTED</span>
-          <span class="re-hero__title-line re-hero__title-line--offset" data-split-chars>TO SOLD</span>
+          <span class="re-hero__title-line" data-split-chars>REAL ESTATE</span>
+          <span class="re-hero__title-line re-hero__title-line--offset" data-split-chars>CREATIVE SERVICES</span>
         </h1>
         <p class="re-hero__sub-text">Flyers, signage, listing photography and drone coverage — handled every month, so you can focus on closing, not creating.</p>
         <div class="re-hero__ctas">
@@ -119,45 +119,33 @@
       </div>
     </section>
 
-    <!-- ============ DESIGN EXAMPLES (CAROUSEL) ============ -->
-    <section class="re-gallery" id="design-examples">
-      <div class="re-gallery__header">
-        <span class="section-label"><i>01</i> — Design examples</span>
-        <h2 class="re-gallery__title" data-split-chars>SAMPLE WORK</h2>
-        <p class="re-gallery__note">Sample layouts — your listings, branded to match. Click to enlarge.</p>
-      </div>
-      <div class="re-gallery__carousel">
-        <div class="re-gallery__viewport" data-carousel>
+    <!-- ============ DESIGN EXAMPLES (CONTINUOUS MARQUEE) ============ -->
+    <section class="re-gallery" id="design-examples" aria-label="Design examples">
+      <div class="re-gallery__marquee">
+        <div class="re-gallery__track" data-gallery-marquee>
           <button type="button" class="re-gallery__item" data-image="assets/re-flyer-01.jpg" data-title="Open House — Clean &amp; Bold" data-cursor="view">
             <img class="re-gallery__img" src="assets/re-flyer-01.jpg" alt="Open house flyer — clean and bold layout" loading="lazy" />
-            <span class="re-gallery__caption">Open House — Clean &amp; Bold</span>
           </button>
           <button type="button" class="re-gallery__item" data-image="assets/re-flyer-02.jpg" data-title="Open House — Warm &amp; Editorial" data-cursor="view">
             <img class="re-gallery__img" src="assets/re-flyer-02.jpg" alt="Open house flyer — warm editorial layout" loading="lazy" />
-            <span class="re-gallery__caption">Open House — Warm &amp; Editorial</span>
           </button>
           <button type="button" class="re-gallery__item" data-image="assets/re-flyer-03.jpg" data-title="New Listing — Bold Feature Sheet" data-cursor="view">
             <img class="re-gallery__img" src="assets/re-flyer-03.jpg" alt="New listing flyer — bold feature sheet" loading="lazy" />
-            <span class="re-gallery__caption">New Listing — Bold Feature Sheet</span>
           </button>
           <button type="button" class="re-gallery__item" data-image="assets/re-flyer-04.jpg" data-title="Open House — Minimalist Invite" data-cursor="view">
             <img class="re-gallery__img" src="assets/re-flyer-04.jpg" alt="Open house flyer — minimalist invite" loading="lazy" />
-            <span class="re-gallery__caption">Open House — Minimalist Invite</span>
           </button>
           <button type="button" class="re-gallery__item" data-image="assets/re-flyer-05.jpg" data-title="New Listing — Moody &amp; Modern" data-cursor="view">
             <img class="re-gallery__img" src="assets/re-flyer-05.jpg" alt="New listing flyer — moody and modern layout" loading="lazy" />
-            <span class="re-gallery__caption">New Listing — Moody &amp; Modern</span>
           </button>
         </div>
-        <button type="button" class="re-gallery__arrow re-gallery__arrow--prev" data-carousel-prev aria-label="Previous examples">←</button>
-        <button type="button" class="re-gallery__arrow re-gallery__arrow--next" data-carousel-next aria-label="Next examples">→</button>
       </div>
     </section>
 
     <!-- ============ INTRO ============ -->
     <section class="re-intro">
       <div class="re-intro__inner">
-        <span class="section-label"><i>02</i> — Why a subscription</span>
+        <span class="section-label"><i>01</i> — Why a subscription</span>
         <p class="re-intro__text" data-words-reveal>
           Most agents piece marketing together listing by listing — a designer here, a
           photographer there, a signage order somewhere else. It's expensive, it's slow,
@@ -171,7 +159,7 @@
     <!-- ============ PACKAGES ============ -->
     <section class="packages" id="packages">
       <div class="packages__header">
-        <span class="section-label"><i>03</i> — Monthly plans</span>
+        <span class="section-label"><i>02</i> — Monthly plans</span>
         <h2 class="packages__title" data-split-chars>PACKAGES</h2>
         <p class="packages__note">No listing caps. No long-term contract. Cancel anytime.</p>
       </div>
@@ -222,7 +210,7 @@
     <!-- ============ PROCESS (plan selection only) ============ -->
     <section class="re-process" id="process">
       <div class="re-process__header">
-        <span class="section-label"><i>04</i> — How it works</span>
+        <span class="section-label"><i>03</i> — How it works</span>
       </div>
       <div class="re-process__list re-process__list--compact">
         <div class="re-process__step" data-fade-up>
@@ -276,7 +264,7 @@
     <!-- ============ CONTACT / FOOTER ============ -->
     <footer class="contact" id="contact">
       <div class="contact__inner">
-        <span class="section-label"><i>05</i> — Next step</span>
+        <span class="section-label"><i>04</i> — Next step</span>
         <h2 class="contact__title">
           <span class="contact__title-line" data-split-chars>LET’S GROW</span>
           <span class="contact__title-line contact__title-line--accent" data-split-chars>YOUR PIPELINE</span>
@@ -380,7 +368,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 
-  <script src="js/main.js?v=15"></script>
+  <script src="js/main.js?v=16"></script>
 
   <!-- ============ CHATBOT WIDGET ============ -->
   <script src="https://chatbot-bayou-belle-ealn942so-jay-c-projects.vercel.app/widget.js" data-bot="bot_mr32hxfbup4x8v" async></script>
