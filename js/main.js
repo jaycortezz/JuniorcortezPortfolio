@@ -91,7 +91,7 @@
   function heroEntrance() {
     if (!hasGsap) return;
     const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-    tl.to(".hero__title-line .char", {
+    tl.to(".hero__title-line .char, .re-hero__title-line .char", {
       y: 0, rotate: 0, duration: 1.2, stagger: 0.025,
     })
       .from(".hero__eyebrow", { y: 24, autoAlpha: 0, duration: 0.8 }, "-=0.8")
@@ -353,7 +353,19 @@
   if (backToTop) backToTop.addEventListener("click", () => scrollToTarget(0));
 
   /* ------------------------------------------------------------------
-     Film lightbox — click a project card, watch it without leaving
+     Simple horizontal carousel arrows (e.g. real estate design gallery)
+  ------------------------------------------------------------------ */
+  document.querySelectorAll("[data-carousel]").forEach((viewport) => {
+    const wrap = viewport.parentElement;
+    const prev = wrap.querySelector("[data-carousel-prev]");
+    const next = wrap.querySelector("[data-carousel-next]");
+    const step = () => viewport.clientWidth * 0.85;
+    if (prev) prev.addEventListener("click", () => viewport.scrollBy({ left: -step(), behavior: "smooth" }));
+    if (next) next.addEventListener("click", () => viewport.scrollBy({ left: step(), behavior: "smooth" }));
+  });
+
+  /* ------------------------------------------------------------------
+     Film / image lightbox — click a card, view it without leaving
   ------------------------------------------------------------------ */
   const lightbox = document.getElementById("lightbox");
   const lightboxFrame = document.getElementById("lightboxFrame");
@@ -399,13 +411,28 @@
     setLightboxVisible(true);
   }
 
+  function openImage(src, title) {
+    if (!lightbox || !src) return;
+    lightboxTitle.textContent = title || "";
+    lightboxFrame.classList.add("is-image");
+    lightboxFrame.innerHTML = '<img src="' + src + '" alt="' + (title || "") + '" />';
+    lightbox.setAttribute("aria-hidden", "false");
+    lightboxOpen = true;
+    if (lenis) lenis.stop();
+    document.documentElement.style.overflow = "hidden";
+    setLightboxVisible(true);
+  }
+
   function closeFilm() {
     if (!lightboxOpen) return;
     lightboxOpen = false;
     lightbox.setAttribute("aria-hidden", "true");
     setLightboxVisible(false);
     // drop the iframe so playback stops immediately
-    setTimeout(() => { lightboxFrame.innerHTML = ""; }, 350);
+    setTimeout(() => {
+      lightboxFrame.innerHTML = "";
+      lightboxFrame.classList.remove("is-image");
+    }, 350);
     if (lenis) lenis.start();
     document.documentElement.style.overflow = "";
   }
@@ -413,6 +440,9 @@
   if (lightbox) {
     document.querySelectorAll("[data-video]").forEach((card) => {
       card.addEventListener("click", () => openFilm(card.dataset.video, card.dataset.title));
+    });
+    document.querySelectorAll("[data-image]").forEach((card) => {
+      card.addEventListener("click", () => openImage(card.dataset.image, card.dataset.title));
     });
     document.getElementById("lightboxClose").addEventListener("click", closeFilm);
     document.getElementById("lightboxBackdrop").addEventListener("click", closeFilm);
@@ -500,7 +530,7 @@
   });
 
   /* --- section titles: char rise on enter --- */
-  document.querySelectorAll(".work__title, .services__title, .contact__title-line").forEach((el) => {
+  document.querySelectorAll(".work__title, .services__title, .contact__title-line, .packages__title, .re-gallery__title, .re-video-hero__title-line").forEach((el) => {
     gsap.to(el.querySelectorAll(".char"), {
       y: 0,
       rotate: 0,

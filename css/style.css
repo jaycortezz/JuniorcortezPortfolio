@@ -1111,6 +1111,22 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
   border: 0;
   display: block;
 }
+.lightbox__frame.is-image {
+  aspect-ratio: auto;
+  background: none;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.lightbox__frame.is-image img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-height: 82svh;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
 
 /* ==========================================================================
    REAL ESTATE PAGE
@@ -1200,13 +1216,27 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
   color: var(--ink-dim);
 }
 
-.re-gallery__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
-  gap: clamp(1.5rem, 3vw, 2rem);
-}
+.re-gallery__carousel { position: relative; }
 
-.re-gallery__item { display: block; }
+.re-gallery__viewport {
+  display: flex;
+  gap: clamp(1.2rem, 3vw, 2rem);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: clamp(1.5rem, 6vw, 6rem);
+  padding: 0.2rem 0.2rem 0.8rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.re-gallery__viewport::-webkit-scrollbar { display: none; }
+
+.re-gallery__item {
+  display: block;
+  flex: 0 0 auto;
+  width: clamp(13rem, 30vw, 18rem);
+  scroll-snap-align: start;
+  text-align: left;
+}
 .re-gallery__img {
   width: 100%;
   aspect-ratio: 3 / 4;
@@ -1229,6 +1259,24 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
   text-transform: uppercase;
   color: var(--ink-dim);
 }
+
+.re-gallery__arrow {
+  position: absolute;
+  top: 38%;
+  width: 2.8rem;
+  height: 2.8rem;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  font-size: 1rem;
+  transition: border-color 0.3s, color 0.3s;
+}
+.re-gallery__arrow:hover { border-color: var(--accent); color: var(--accent); }
+.re-gallery__arrow--prev { left: -0.6rem; }
+.re-gallery__arrow--next { right: -0.6rem; }
+@media (max-width: 700px) { .re-gallery__arrow { display: none; } }
 
 /* --- packages --- */
 .packages {
@@ -1315,20 +1363,34 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
 
 .pricing-card__cta { align-self: flex-start; padding: 1rem clamp(1.6rem, 3vw, 2.2rem); font-size: 0.85rem; }
 
-/* --- video (per-project) --- */
-.re-video { padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 6rem); }
-.re-video__header { margin-bottom: clamp(3rem, 6vw, 5rem); }
-.re-video__title {
+/* --- video (own hero, per-project) --- */
+.re-video-hero {
+  position: relative;
+  padding: clamp(6rem, 12vw, 10rem) clamp(1.5rem, 6vw, 6rem) clamp(5rem, 10vw, 8rem);
+  background: radial-gradient(120% 90% at 30% 10%, #122430 0%, #02111b 60%);
+}
+.re-video-hero__inner { max-width: 50rem; margin-bottom: clamp(3rem, 7vw, 5.5rem); }
+.re-video-hero__eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 2rem;
+}
+.re-video-hero__title {
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: clamp(2.6rem, 8vw, 6rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.8rem, 9vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
 }
-.re-video__note {
-  margin-top: 1rem;
-  font-size: 0.85rem;
-  letter-spacing: 0.05em;
+.re-video-hero__title-line { display: block; white-space: nowrap; }
+.re-video-hero__title-line--offset { margin-left: clamp(1.2rem, 4vw, 4rem); }
+.re-video-hero__sub-text {
+  margin-top: 2rem;
+  max-width: 30rem;
+  font-size: 1.05rem;
   color: var(--ink-dim);
 }
 
@@ -1373,6 +1435,7 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
   gap: clamp(2rem, 5vw, 3rem);
 }
+.re-process__list--compact { max-width: 44rem; }
 .re-process__step { border-top: 1px solid var(--line); padding-top: 1.4rem; }
 .re-process__num {
   display: block;
@@ -1391,6 +1454,74 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
   margin-bottom: 0.5rem;
 }
 .re-process__step p { font-size: 0.9rem; color: var(--ink-dim); }
+
+/* ==========================================================================
+   REAL ESTATE PROMO BAND (on the main site)
+   ========================================================================== */
+
+.re-promo {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.5rem, 6vw, 6rem);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.re-promo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease-expo);
+  z-index: 0;
+}
+.re-promo:hover::before { transform: scaleX(1); }
+
+.re-promo__inner { position: relative; z-index: 1; max-width: 42rem; }
+.re-promo__eyebrow {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  transition: color 0.4s;
+}
+.re-promo__title {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  transition: color 0.4s;
+}
+.re-promo__sub {
+  margin-top: 1rem;
+  max-width: 30rem;
+  color: var(--ink-dim);
+  transition: color 0.4s;
+}
+.re-promo__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.6rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: color 0.4s;
+}
+.re-promo__arrow { transition: transform 0.4s var(--ease-out); }
+.re-promo:hover .re-promo__arrow { transform: translateX(8px); }
+.re-promo:hover .re-promo__eyebrow,
+.re-promo:hover .re-promo__title,
+.re-promo:hover .re-promo__sub,
+.re-promo:hover .re-promo__cta { color: var(--bg); }
 
 /* ==========================================================================
    NO-ANIMATION FALLBACK
