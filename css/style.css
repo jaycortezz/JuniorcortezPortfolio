@@ -1183,6 +1183,53 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
   letter-spacing: -0.01em;
 }
 
+/* --- design examples gallery --- */
+.re-gallery { padding: clamp(5rem, 10vw, 8rem) clamp(1.5rem, 6vw, 6rem); }
+.re-gallery__header { margin-bottom: clamp(3rem, 6vw, 5rem); }
+.re-gallery__title {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 8vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.re-gallery__note {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--ink-dim);
+}
+
+.re-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.re-gallery__item { display: block; }
+.re-gallery__img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: top;
+  filter: grayscale(35%) contrast(1.05);
+  transform: scale(1.04);
+  transition: transform 1s var(--ease-out), filter 0.6s;
+  background: linear-gradient(135deg, #122430, #041424);
+}
+.re-gallery__item:hover .re-gallery__img {
+  transform: scale(1);
+  filter: grayscale(0%) contrast(1.05);
+}
+.re-gallery__caption {
+  display: block;
+  margin-top: 0.9rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
 /* --- packages --- */
 .packages {
   background: var(--bg-soft);
