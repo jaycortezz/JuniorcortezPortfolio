@@ -1342,7 +1342,7 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
 .re-video-hero__title {
   font-family: var(--font-heading);
   font-weight: 400;
-  font-size: clamp(2.8rem, 9vw, 7rem);
+  font-size: clamp(1.75rem, 9vw, 7rem);
   line-height: 0.95;
   letter-spacing: -0.01em;
   text-transform: uppercase;
