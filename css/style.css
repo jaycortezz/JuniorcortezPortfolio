@@ -1325,6 +1325,16 @@ body.menu-open .nav__toggle-lines i:last-child { transform: translateY(-3.25px) 
 
 .pricing-card__cta { align-self: flex-start; padding: 1rem clamp(1.6rem, 3vw, 2.2rem); font-size: 0.85rem; }
 
+.pricing-card__disclaimer {
+  align-self: flex-end;
+  max-width: 14rem;
+  font-size: 0.68rem;
+  font-style: italic;
+  line-height: 1.4;
+  text-align: right;
+  color: var(--ink-dim);
+}
+
 /* --- video (own hero, per-project) --- */
 .re-video-hero {
   position: relative;
