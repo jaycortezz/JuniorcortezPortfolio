@@ -30,14 +30,6 @@
     <div class="preloader__curtain preloader__curtain--2"></div>
   </div>
 
-  <!-- ============ CUSTOM CURSOR ============ -->
-  <div class="cursor" id="cursor">
-    <div class="cursor__dot"></div>
-    <div class="cursor__ring">
-      <span class="cursor__label"></span>
-    </div>
-  </div>
-
   <!-- ============ GRAIN OVERLAY ============ -->
   <div class="grain" aria-hidden="true"></div>
 
@@ -145,12 +137,16 @@
       </div>
     </section>
 
-    <!-- ============ SELECTED WORK (horizontal scroll) ============ -->
+    <!-- ============ SELECTED WORK (side-scrolling row) ============ -->
     <section class="work" id="work">
       <div class="work__header">
         <span class="section-label"><i>02</i> — Selected work</span>
         <h2 class="work__title" data-split-chars>FILMS</h2>
-        <span class="work__hint">( scroll )</span>
+        <div class="work__nav">
+          <span class="work__hint">Swipe or use arrows</span>
+          <button type="button" class="work__arrow" id="workPrev" aria-label="Previous films">&larr;</button>
+          <button type="button" class="work__arrow" id="workNext" aria-label="More films">&rarr;</button>
+        </div>
       </div>
       <div class="work__pin" id="workPin">
         <div class="work__track" id="workTrack">

@@ -1,7 +1,7 @@
 /* ==========================================================================
    JUNIOR CORTEZ — interaction layer
-   Preloader · Lenis smooth scroll · custom cursor · magnetic elements ·
-   split-text reveals · pinned horizontal work gallery · service accordions
+   Preloader · Lenis smooth scroll · magnetic elements ·
+   split-text reveals · side-scrolling work gallery · service accordions
    with mouse-following previews · showreel scale · marquee · counters
    ========================================================================== */
 
@@ -78,7 +78,13 @@
   ------------------------------------------------------------------ */
   let lenis = null;
   if (typeof Lenis !== "undefined" && hasGsap && !reduceMotion) {
-    lenis = new Lenis({ duration: 1.15, smoothWheel: true });
+    lenis = new Lenis({
+      duration: 1.15,
+      smoothWheel: true,
+      // sideways trackpad swipes over the Films row scroll the row, not the page
+      virtualScroll: ({ deltaX, deltaY, event }) =>
+        !(Math.abs(deltaX) > Math.abs(deltaY) && event.target.closest && event.target.closest("#workPin")),
+    });
     lenis.on("scroll", ScrollTrigger.update);
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
@@ -182,43 +188,6 @@
   setTimeout(() => {
     if (document.getElementById("preloader")) runPreloader();
   }, 5000);
-
-  /* ------------------------------------------------------------------
-     Custom cursor + contextual labels (VIEW / PLAY)
-  ------------------------------------------------------------------ */
-  const cursor = document.getElementById("cursor");
-  if (cursor && !isTouch && hasGsap) {
-    document.body.classList.add("has-cursor");
-    const label = cursor.querySelector(".cursor__label");
-    const xTo = gsap.quickTo(cursor, "x", { duration: 0.35, ease: "power3.out" });
-    const yTo = gsap.quickTo(cursor, "y", { duration: 0.35, ease: "power3.out" });
-
-    window.addEventListener("pointermove", (e) => {
-      xTo(e.clientX);
-      yTo(e.clientY);
-    });
-
-    document.querySelectorAll("[data-cursor]").forEach((el) => {
-      const mode = el.dataset.cursor;
-      el.addEventListener("pointerenter", () => {
-        cursor.className = "cursor is-" + mode;
-        label.textContent = mode === "view" ? "View" : mode === "play" ? "Play" : "";
-      });
-      el.addEventListener("pointerleave", () => {
-        cursor.className = "cursor";
-        label.textContent = "";
-      });
-    });
-
-    // embedded players are cross-origin iframes that swallow pointer events,
-    // which would freeze the ring mid-screen — hide it over them instead
-    document.querySelectorAll("#showreelStage, .lightbox__frame").forEach((zone) => {
-      zone.addEventListener("pointerenter", () => cursor.classList.add("is-hidden"));
-      zone.addEventListener("pointerleave", () => cursor.classList.remove("is-hidden"));
-    });
-  } else if (cursor) {
-    cursor.style.display = "none";
-  }
 
   /* ------------------------------------------------------------------
      Magnetic elements
@@ -450,6 +419,50 @@
     });
   }
 
+  /* ------------------------------------------------------------------
+     Films row — scroll left/right with swipe, trackpad, arrows or drag
+  ------------------------------------------------------------------ */
+  const workPin = document.getElementById("workPin");
+  if (workPin) {
+    const prev = document.getElementById("workPrev");
+    const next = document.getElementById("workNext");
+    const step = () => {
+      const card = workPin.querySelector(".project");
+      return card ? card.getBoundingClientRect().width + parseFloat(getComputedStyle(workPin.firstElementChild).columnGap || 0) : workPin.clientWidth * 0.8;
+    };
+    const updateArrows = () => {
+      const max = workPin.scrollWidth - workPin.clientWidth - 2;
+      if (prev) prev.disabled = workPin.scrollLeft <= 2;
+      if (next) next.disabled = workPin.scrollLeft >= max;
+    };
+    const smooth = reduceMotion ? "auto" : "smooth";
+    if (prev) prev.addEventListener("click", () => workPin.scrollBy({ left: -step(), behavior: smooth }));
+    if (next) next.addEventListener("click", () => workPin.scrollBy({ left: step(), behavior: smooth }));
+    workPin.addEventListener("scroll", updateArrows, { passive: true });
+    window.addEventListener("resize", updateArrows);
+    updateArrows();
+
+    // click-and-drag for mouse users; a real drag doesn't open the film
+    let dragging = false, moved = false, startX = 0, startScroll = 0;
+    workPin.addEventListener("pointerdown", (e) => {
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+      dragging = true; moved = false;
+      startX = e.clientX; startScroll = workPin.scrollLeft;
+    });
+    window.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - startX;
+      if (!moved && Math.abs(dx) > 6) { moved = true; workPin.classList.add("is-dragging"); }
+      if (moved) { e.preventDefault(); workPin.scrollLeft = startScroll - dx; }
+    });
+    window.addEventListener("pointerup", () => {
+      if (!dragging) return;
+      dragging = false;
+      if (moved) setTimeout(() => workPin.classList.remove("is-dragging"), 0);
+    });
+    workPin.addEventListener("dragstart", (e) => e.preventDefault());
+  }
+
   /* ==================================================================
      SCROLL-DRIVEN ANIMATIONS (everything below needs GSAP + ST)
   ================================================================== */
@@ -567,53 +580,17 @@
     });
   });
 
-  /* --- work: pinned horizontal scroll (desktop only) --- */
-  const workTrack = document.getElementById("workTrack");
-  const workPin = document.getElementById("workPin");
-  if (workTrack && workPin) {
-    ScrollTrigger.matchMedia({
-      "(min-width: 821px)": function () {
-        const getDistance = () => workTrack.scrollWidth - window.innerWidth;
-        gsap.to(workTrack, {
-          x: () => -getDistance(),
-          ease: "none",
-          scrollTrigger: {
-            trigger: workPin,
-            start: "top 12%",
-            end: () => "+=" + getDistance(),
-            pin: true,
-            scrub: 1,
-            invalidateOnRefresh: true,
-            anticipatePin: 1,
-          },
-        });
-        // subtle parallax inside each card while the track moves
-        document.querySelectorAll(".project__img").forEach((img) => {
-          gsap.fromTo(img, { xPercent: -6 }, {
-            xPercent: 6,
-            ease: "none",
-            scrollTrigger: {
-              trigger: workPin,
-              start: "top 12%",
-              end: () => "+=" + getDistance(),
-              scrub: 1,
-            },
-          });
-        });
-      },
-      "(max-width: 820px)": function () {
-        // mobile: plain swipeable row
-        workPin.style.overflowX = "auto";
-        gsap.utils.toArray(".project").forEach((card) => {
-          gsap.from(card, {
-            y: 40,
-            autoAlpha: 0,
-            duration: 0.8,
-            ease: "power3.out",
-            scrollTrigger: { trigger: card, start: "top 92%", once: true },
-          });
-        });
-      },
+  /* --- work: card reveal (the row itself is a native side scroller) --- */
+  if (document.getElementById("workTrack")) {
+    gsap.utils.toArray(".project").forEach((card, i) => {
+      gsap.from(card, {
+        y: 40,
+        autoAlpha: 0,
+        duration: 0.8,
+        delay: Math.min(i, 3) * 0.08,
+        ease: "power3.out",
+        scrollTrigger: { trigger: "#workPin", start: "top 85%", once: true },
+      });
     });
   }
 
